@@ -1,6 +1,5 @@
 #!/usr/bin/python
 
-
 """
     Starter code for the evaluation mini-project.
     Start by copying your trained/tested POI identifier from
@@ -26,6 +25,18 @@ labels, features = targetFeatureSplit(data)
 
 
 
-### your code goes here 
+### your code goes here
+from sklearn.cross_validation import train_test_split
+features_train, features_test, labels_train, labels_test = train_test_split(features, labels, test_size=0.3, random_state=42)
 
+from sklearn import tree
+from sklearn.metrics import accuracy_score
+clf = tree.DecisionTreeClassifier()
+clf.fit(features_train, labels_train)
+pred = clf.predict(features_test)
+# pred = [int(x == 10) for x in pred]
+print 'accuracy:', accuracy_score(pred, labels_test)
 
+poi_count = len(pred[1 in pred >0])
+print("No. of POIs: {}".format(poi_count))
+print("People in test set: {}".format(len(labels_test)))
